@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <div class="text-center p-5">
+            {% for s in status %}
+                {% set word = s.split(" ")%}
+                {% if word[1] == "online" %}
+                    <h2 class="alert alert-success">{{s}}</h2>
+                {% else %}
+                    <h2 class="alert alert-danger">{{s}}</h2>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

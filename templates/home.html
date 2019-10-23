@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-4">
+      <h2>Free champion rotation</h2>
+      <div class="list-group">
+        {% for champ in free_champs %}
+        <button type="button" class="list-group-item list-group-item-action" id="{{champ}}" onClick="test(this.id)">{{champ}}</button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="jumbo" class="col md-8" style=display:none>
+      <div class="jumbotron mt-5">
+        <h1 class="display-4" id="name"></h1>
+        <p class="lead" id="title"></p>
+        <div class="row">
+          <img src="//:0" alt="">
+        </div>
+        <hr class="my-4">
+        <p id="lore"></p>
+        <p class="lead">
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  //Jquery
+  $(document).ready(function() {
+    $("button").click(function() {
+      $("img").attr({
+        src: "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + (this.id) + "_0.jpg",
+        alt: (this.id)
+      });
+      $("#jumbo").css("display", "initial");
+      //$("#name").text(this.id);
+    });
+
+//    $(window).scroll(function(){/
+//        $("#jumbo").stop().animate({"marginTop": ($(window).scrollTop()) + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
+//});
+  });
+</script>
+
+<script type="text/javascript">
+  function test(info) {
+    var i;
+    for (i = 0; i < f.length; i++) {
+      if (info == f[i].name) {
+        document.getElementById("name").innerHTML = f[i].name;
+        document.getElementById("title").innerHTML = f[i].title;
+        document.getElementById("lore").innerHTML = f[i].lore;
+      }
+    }
+    console.log(f);
+  }
+  var f = {{data | safe}}.slice(); // This holds the champion data for javascript
+  test({{data | safe}}); //Adding |safe seems to make it work. Says that the data is safe
+
+</script>
+
+{% endblock scripts %}

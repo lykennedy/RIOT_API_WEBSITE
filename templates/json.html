@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block scripts %}
+
+    <script>
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $("#slide").slideDown("slow").slideUp("slow", function(){
+                    alert("All done");
+                });
+            });
+        });
+    </script>
+
+
+    <div class="container text-center">
+        <p id="hide">Press me to start sliding</p>
+        <p id="slide" style="display:none">DMS</p>
+    </div>
+
+    <button id="animation">Sliding</button>
+    <p id="animate" style="position:absolute">left of 250</p>
+
+
+{% endblock scripts %}
